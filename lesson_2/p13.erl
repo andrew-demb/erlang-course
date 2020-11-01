@@ -11,8 +11,8 @@ decode([{C,Symbol}|T]) ->
 decode([]) ->
     [].
 
-decode_symbol(0, Symbol, Tail) ->
-    [Symbol|Tail];
+decode_symbol(0, _, Tail) ->
+    Tail;
 
 decode_symbol(C, Symbol, Tail) ->
     decode_symbol(C-1, Symbol, [Symbol|Tail]).
