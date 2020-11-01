@@ -6,10 +6,10 @@
 % [a,a,b,b,c,c,c,c,d,d]
 
 duplicate([H|T]) ->
-    duplicate(H, T);
+    duplicate_symbol(H, T);
 
 duplicate([]) ->
     [].
 
-duplicate(X, Y) ->
+duplicate_symbol(X, Y) ->
     [X,X|duplicate(Y)].
