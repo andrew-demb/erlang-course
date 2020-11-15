@@ -8,8 +8,15 @@
 compress([]) ->
     [];
 
-compress([H=H1,H1|T]) ->
-    compress([H|T]);
+compress(L) ->
+    L2 = compress(L, []),
+    p05:reverse(L2).
 
-compress([H|T]) ->
-    [H|compress(T)].
+compress([H=H1,H1|T], Acc) ->
+    compress([H|T], Acc);
+
+compress([H|T], Acc) ->
+    compress(T, [H|Acc]);
+
+compress([], Acc) ->
+    Acc.
