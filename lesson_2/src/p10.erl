@@ -5,14 +5,18 @@
 % p10:encode([a,a,a,a,b,c,c,a,a,d,e,e,e,e]).
 % [{4,a},{1,b},{2,c},{2,a},{1,d},{4,e}]
 
-encode([H|T]) ->
-    encode_symbol(T, 1, H);
+encode(L) ->
+    L2 = encode(L, []),
+    p05:reverse(L2).
 
-encode(X) ->
-    X.
+encode([H|T], Acc) ->
+    encode_symbol(T, 1, H, Acc);
 
-encode_symbol([_=Symbol|T], C, Symbol) ->
-    encode_symbol(T, C+1, Symbol);
+encode([], Acc) ->
+    Acc.
 
-encode_symbol(X, C, Symbol) ->
-    [{C, Symbol}|encode(X)].
+encode_symbol([_=Symbol|T], C, Symbol, Acc) ->
+    encode_symbol(T, C+1, Symbol, Acc);
+
+encode_symbol(X, C, Symbol, Acc) ->
+    encode(X, [{C, Symbol} | Acc]).
