@@ -12,8 +12,8 @@ pack([H|T]) ->
 pack([]) ->
     [].
 
-pack([H=H1|T], [H1|Tail], Acc) ->
-    pack(T, [H, H1|Tail], Acc);
+pack([_=H1|T], [H1|Tail], Acc) ->
+    pack(T, [H1, H1|Tail], Acc);
 
 pack([H|T], Tail, Acc) ->
     pack(T, [H], [Tail | Acc]);
