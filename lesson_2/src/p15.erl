@@ -5,16 +5,15 @@
 % p15:replicate([a,b,c], 3).
 % [a,a,a,b,b,b,c,c,c]
 
-% ToDo: how to avoid extra nesting?
+replicate(L, C) ->
+    L2 = replicate(L, C, C, []),
+    p05:reverse(L2).
 
-replicate([H|T], C) ->
-    [replicate_symbol(C, H, []) | replicate(T, C)];
+replicate([_|T], 0, N, Acc) ->
+    replicate(T, N, N, Acc);
 
-replicate([], _) ->
-    [].
+replicate([H|T], C, N, Acc) ->
+    replicate([H | T], C - 1, N, [H | Acc]);
 
-replicate_symbol(0, _, Tail) ->
-    Tail;
-
-replicate_symbol(C, Symbol, Tail) ->
-    replicate_symbol(C-1, Symbol, [Symbol|Tail]).
+replicate([], _, _, Acc) ->
+    Acc.
