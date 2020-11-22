@@ -5,16 +5,18 @@
 % p12:decode_modified([{4,a},b,{2,c},{2,a},d,{4,e}]).
 % [a,a,a,a,b,c,c,a,a,d,e,e,e,e]
 
-% ToDo: how to avoid extra nesting?
+decode_modified(L) ->
+    L2 = decode_modified(L, []),
+    p05:reverse(L2).
 
-decode_modified([{C,Symbol}|T]) ->
-    [decode_modified_symbol(C, Symbol, []) | decode_modified(T)];
+decode_modified([{C,Symbol}|T], Acc) ->
+    decode_modified(T, [decode_modified_symbol(C, Symbol, []) | Acc]);
 
-decode_modified([Symbol|T]) ->
-    [decode_modified_symbol(1, Symbol, []) | decode_modified(T)];
+decode_modified([Symbol|T], Acc) ->
+    decode_modified(T, [decode_modified_symbol(1, Symbol, []) | Acc]);
 
-decode_modified([]) ->
-    [].
+decode_modified([], Acc) ->
+    Acc.
 
 decode_modified_symbol(0, _, Tail) ->
     Tail;
