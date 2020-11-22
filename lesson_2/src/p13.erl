@@ -5,16 +5,15 @@
 % p13:decode([{4,a},{1,b},{2,c},{2,a},{1,d},{4,e}]).
 % [a,a,a,a,b,c,c,a,a,d,e,e,e,e]
 
-% ToDo: how to avoid extra nesting?
+decode(L) ->
+    L2 = decode(L, []),
+    p05:reverse(L2).
 
-decode([{C,Symbol}|T]) ->
-    [decode_symbol(C, Symbol, []) | decode(T)];
+decode([{0,_}|T], Acc) ->
+    decode(T, Acc);
 
-decode([]) ->
-    [].
+decode([{C,Symbol}|T], Acc) ->
+    decode([{C-1,Symbol} | T], [Symbol | Acc]);
 
-decode_symbol(0, _, Tail) ->
-    Tail;
-
-decode_symbol(C, Symbol, Tail) ->
-    decode_symbol(C-1, Symbol, [Symbol|Tail]).
+decode([], Acc) ->
+    Acc.
