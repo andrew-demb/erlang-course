@@ -1,12 +1,10 @@
 -module(bs03).
 -export([split/2]).
 
-% 1> BinText = <<"Col1-:-Col2-:-Col3-:-Col4-:-Col5">>.
-% <<"Col1-:-Col2-:-Col3-:-Col4-:-Col5">>
-% 2> bs03:split(BinText, "-:-").
+% test
+% BinText = <<"Col1-:-Col2-:-Col3-:-Col4-:-Col5">>.
+% bs03:split(BinText, "-:-").
 % [<<"Col1">>, <<"Col2">>, <<"Col3">>, <<"Col4">>, <<"Col5">>]
-
-% bs03:split(<<"Col1-:-Col2-:-Col3-:-Col4-:-Col5">>, "-:-").
 
 split(Binary, Delimiter) ->
     S = length(Delimiter),
@@ -31,3 +29,11 @@ split(<<>>, _, _, Acc, WordsAcc) ->
 
 append_word(String, WordsAcc) ->
     [list_to_binary(lists:reverse(String)) | WordsAcc].
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+words_test_() ->
+    ?_assert(
+        split(<<"Col1-:-Col2-:-Col3-:-Col4-:-Col5">>, "-:-") =:= [<<"Col1">>, <<"Col2">>, <<"Col3">>, <<"Col4">>, <<"Col5">>]
+    ).
+-endif.

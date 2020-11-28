@@ -10,3 +10,9 @@ last([H|[]]) ->
 
 last([_|T]) ->
   last(T).
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+last_test_() ->
+    ?_assert(last([a,b,c,d,e,f]) =:= f).
+-endif.

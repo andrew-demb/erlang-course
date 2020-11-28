@@ -23,3 +23,9 @@ encode_symbol(X, 1, Symbol, Acc) ->
 
 encode_symbol(X, C, Symbol, Acc) ->
     encode_modified(X, [{C, Symbol} | Acc]).
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+encode_modified_test_() ->
+    ?_assert(encode_modified([a,a,a,a,b,c,c,a,a,d,e,e,e,e]) =:= [{4,a},b,{2,c},{2,a},d,{4,e}]).
+-endif.

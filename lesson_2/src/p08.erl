@@ -20,3 +20,9 @@ compress([H|T], Acc) ->
 
 compress([], Acc) ->
     Acc.
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+compress_test_() ->
+    ?_assert(compress([a,a,a,a,b,c,c,a,a,d,e,e,e,e]) =:= [a,b,c,a,d,e]).
+-endif.

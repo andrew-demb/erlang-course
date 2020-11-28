@@ -14,3 +14,9 @@ duplicate([H|T], Acc) ->
 
 duplicate([], Acc) ->
     Acc.
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+duplicate_test_() ->
+    ?_assert(duplicate([a,b,c,c,d]) =:= [a,a,b,b,c,c,c,c,d,d]).
+-endif.

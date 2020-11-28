@@ -20,3 +20,9 @@ pack([H|T], Tail, Acc) ->
 
 pack([], Tail, Acc) ->
     [Tail | Acc].
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+pack_test_() ->
+    ?_assert(pack([a,a,a,a,b,c,c,a,a,d,e,e,e,e]) =:= [[a,a,a,a],[b],[c,c],[a,a],[d],[e,e,e,e]]).
+-endif.

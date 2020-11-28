@@ -23,3 +23,9 @@ flatten([], Acc) ->
 
 flatten(H, Acc) ->
     [H | Acc].
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+flatten_test_() ->
+    ?_assert(flatten([a,[],[b,[c,d],e]]) =:= [a,b,c,d,e]).
+-endif.

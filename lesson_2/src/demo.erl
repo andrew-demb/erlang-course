@@ -11,3 +11,9 @@ double_num(X) ->
 
 times(X, N) ->
   X * N.
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+double_num_test_() ->
+    ?_assert(double_num(5) =:= 10).
+-endif.

@@ -15,3 +15,10 @@ len([], I) ->
 
 len([_|T], I) ->
     len(T, I+1).
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+len_test_() -> [
+    ?_assert(len([]) =:= 0),
+    ?_assert(len([a,b,c,d]) =:= 4)].
+-endif.

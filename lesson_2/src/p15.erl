@@ -17,3 +17,9 @@ replicate([H|T], C, N, Acc) ->
 
 replicate([], _, _, Acc) ->
     Acc.
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+replicate_test_() ->
+    ?_assert(replicate([a,b,c], 3) =:= [a,a,a,b,b,b,c,c,c]).
+-endif.

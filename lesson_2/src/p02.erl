@@ -13,3 +13,9 @@ but_last([_|T]) ->
 
 but_last([]) ->
     [].
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+but_last_test_() ->
+    ?_assert(but_last([a,b,c,d,e,f]) =:= [e,f]).
+-endif.

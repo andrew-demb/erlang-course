@@ -17,3 +17,9 @@ decode([{C,Symbol}|T], Acc) ->
 
 decode([], Acc) ->
     Acc.
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+decode_test_() ->
+    ?_assert(decode([{4,a},{1,b},{2,c},{2,a},{1,d},{4,e}]) =:= [a,a,a,a,b,c,c,a,a,d,e,e,e,e]).
+-endif.
